@@ -7,10 +7,10 @@ insert into t_article values
 
 /* raw password is 'john' */
 insert into t_user values
-(1, 'JohnDoe', 'YcM=A$nsYzkyeDVjEUa7W9K', 'L2nNR5hIcinaJkKR+j4baYaZjcHS0c3WX2gjYF6Tmgl1Bs+C9Qbr+69X8eQwXDvw0vp73PrcSeT0bGEW5+T2hA==', 'ROLE_USER');
+(1, 'JohnDoe', 'L2nNR5hIcinaJkKR+j4baYaZjcHS0c3WX2gjYF6Tmgl1Bs+C9Qbr+69X8eQwXDvw0vp73PrcSeT0bGEW5+T2hA==', 'YcM=A$nsYzkyeDVjEUa7W9K', 'ROLE_USER');
 /* raw password is 'jane' */
 insert into t_user values
-(2, 'JaneDoe', 'dhMTBkzwDKxnD;4KNs,4ENy', 'EfakNLxyhHy2hVJlxDmVNl1pmgjUZl99gtQ+V3mxSeD8IjeZJ8abnFIpw9QNahwAlEaXBiQUBLXKWRzOmSr8HQ==', 'ROLE_USER');
+(2, 'JaneDoe', 'EfakNLxyhHy2hVJlxDmVNl1pmgjUZl99gtQ+V3mxSeD8IjeZJ8abnFIpw9QNahwAlEaXBiQUBLXKWRzOmSr8HQ==', 'dhMTBkzwDKxnD;4KNs,4ENy', 'ROLE_USER');
 
 insert into t_comment values
 (1, 'Great! Keep up the good work.', 1, 1);
