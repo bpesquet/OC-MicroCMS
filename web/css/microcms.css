@@ -16,3 +16,8 @@ body {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+#errorPanel {
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
