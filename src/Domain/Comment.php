@@ -14,7 +14,7 @@ class Comment
     /**
      * Comment author.
      *
-     * @var string
+     * @var \MicroCMS\Domain\User
      */
     private $author;
 
@@ -44,7 +44,7 @@ class Comment
         return $this->author;
     }
 
-    public function setAuthor($author) {
+    public function setAuthor(User $author) {
         $this->author = $author;
     }
 
