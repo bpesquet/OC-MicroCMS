@@ -9,12 +9,14 @@
     <header>
         <h1>MicroCMS</h1>
     </header>
-    <?php foreach ($articles as $article): ?>
+    {% autoescape %}
+    {% for article in articles %}
     <article>
-        <h2><?php echo $article->getTitle() ?></h2>
-        <p><?php echo $article->getContent() ?></p>
+        <h2>{{ article.title }}</h2>
+        <p>{{ article.content }}</p>
     </article>
-    <?php endforeach; ?>
+    {% endfor %}
+    {% endautoescape %}
     <footer class="footer">
         <a href="https://github.com/bpesquet/MicroCMS">MicroCMS</a> is a minimalistic CMS built as a showcase for modern PHP development.
     </footer>
