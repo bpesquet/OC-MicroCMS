@@ -17,3 +17,6 @@ $app['db.options'] = array(
     'user'     => "$username",
     'password' => "$password",
 );
+
+// define log parameters
+$app['monolog.level'] = 'WARNING';
