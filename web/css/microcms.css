@@ -11,3 +11,8 @@ body {
 .articleTitle:hover, .articleTitle:focus {
     text-decoration: none;
 }
+
+.adminTable {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

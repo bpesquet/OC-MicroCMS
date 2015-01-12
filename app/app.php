@@ -12,6 +12,11 @@ $app->register(new Silex\Provider\DoctrineServiceProvider());
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
+$app['twig'] = $app->share($app->extend('twig', function(Twig_Environment $twig, $app) {
+    $twig->addExtension(new Twig_Extensions_Extension_Text());
+    return $twig;
+}));
+$app->register(new Silex\Provider\ValidatorServiceProvider());
 $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
@@ -25,6 +30,12 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
                 return new MicroCMS\DAO\UserDAO($app['db']);
             }),
         ),
+    ),
+    'security.role_hierarchy' => array(
+        'ROLE_ADMIN' => array('ROLE_USER'),
+    ),
+    'security.access_rules' => array(
+        array('^/admin', 'ROLE_ADMIN'),
     ),
 ));
 $app->register(new Silex\Provider\FormServiceProvider());
@@ -43,3 +54,4 @@ $app['dao.comment'] = $app->share(function ($app) {
     $commentDAO->setUserDAO($app['dao.user']);
     return $commentDAO;
 });
+

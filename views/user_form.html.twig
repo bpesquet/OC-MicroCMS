@@ -1,0 +1,70 @@
+{% extends 'layout.html.twig' %}
+{% set adminMenu = true %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<h2 class="text-center">{{ block('title') }}</h2>
+{% for flashMessage in app.session.flashbag.get('success') %}
+<div class="alert alert-success">
+    {{ flashMessage }}
+</div>
+{% endfor %}
+{% if form_errors(userForm.password.first) %}
+<div class="alert alert-danger">
+    {{ form_errors(userForm.password.first) }}
+</div>
+{% endif %}
+
+<div class="well">
+{{ form_start(userForm, { 'attr': {'class': 'form-horizontal'} }) }}
+    <div class="form-group">
+        {{ form_label(userForm.username, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-4">
+            {{ form_errors(userForm.username) }}
+            {{ form_widget(userForm.username, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(userForm.password.first, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-4">
+            {{ form_widget(userForm.password.first, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(userForm.password.second, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-4">
+            {{ form_widget(userForm.password.second, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(userForm.role, null, { 'label_attr':  {
+            'class': 'col-sm-5 control-label'
+        }}) }}
+        <div class="col-sm-2">
+            {{ form_errors(userForm.role) }}
+            {{ form_widget(userForm.role, { 'attr':  {
+                'class': 'form-control'
+            }}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-5 col-sm-3">
+            <input type="submit" class="btn btn-primary" value="Save" />
+        </div>
+    </div>
+{{ form_end(userForm) }}
+</div>
+{% endblock %}
