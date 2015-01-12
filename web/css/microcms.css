@@ -1,3 +1,7 @@
+body { 
+    padding-top: 40px; 
+}
+
 .footer {
     border-top: 1px solid #ccc;
     padding-top: 10px;

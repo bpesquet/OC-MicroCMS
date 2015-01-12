@@ -1,24 +1,40 @@
 <!doctype html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <link href="microcms.css" rel="stylesheet" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ app.request.basepath }}/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ app.request.basepath }}/css/microcms.css" rel="stylesheet">
     <title>MicroCMS - Home</title>
 </head>
 <body>
-    <header>
-        <h1>MicroCMS</h1>
-    </header>
-    {% autoescape %}
-    {% for article in articles %}
-    <article>
-        <h2>{{ article.title }}</h2>
-        <p>{{ article.content }}</p>
-    </article>
-    {% endfor %}
-    {% endautoescape %}
-    <footer class="footer">
-        <a href="https://github.com/bpesquet/MicroCMS">MicroCMS</a> is a minimalistic CMS built as a showcase for modern PHP development.
-    </footer>
+    <div class="container">
+        <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-target">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">MicroCMS</a>
+                </div>
+                <div class="collapse navbar-collapse" id="navbar-collapse-target">
+                </div>
+            </div><!-- /.container -->
+        </nav>
+        {% autoescape %}
+        {% for article in articles %}
+        <article>
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.content }}</p>
+        </article>
+        {% endfor %}
+        {% endautoescape %}
+        <footer class="footer">
+            <a href="https://github.com/bpesquet/MicroCMS">MicroCMS</a> is a minimalistic CMS built as a showcase for modern PHP development.
+        </footer>
+    </div>
 </body>
 </html>
