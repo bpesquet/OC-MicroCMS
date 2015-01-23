@@ -9,14 +9,12 @@
     <header>
         <h1>MicroCMS</h1>
     </header>
-    {% autoescape %}
     {% for article in articles %}
     <article>
         <h2>{{ article.title }}</h2>
         <p>{{ article.content }}</p>
     </article>
     {% endfor %}
-    {% endautoescape %}
     <footer class="footer">
         <a href="https://github.com/bpesquet/OC-MicroCMS">MicroCMS</a> is a minimalistic CMS built as a showcase for modern PHP development.
     </footer>
