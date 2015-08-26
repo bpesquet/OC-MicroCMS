@@ -20,7 +20,7 @@ class CommentDAO extends DAO
         $this->articleDAO = $articleDAO;
     }
 
-    public function setUserDAO($userDAO) {
+    public function setUserDAO(UserDAO $userDAO) {
         $this->userDAO = $userDAO;
     }
 

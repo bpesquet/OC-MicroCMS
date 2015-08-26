@@ -8,17 +8,17 @@ use MicroCMS\Form\Type\CommentType;
 $app->get('/', function () use ($app) {
     $articles = $app['dao.article']->findAll();
     return $app['twig']->render('index.html.twig', array('articles' => $articles));
-});
+})->bind('home');
 
 // Article details with comments
 $app->match('/article/{id}', function ($id, Request $request) use ($app) {
     $article = $app['dao.article']->find($id);
-    $user = $app['security']->getToken()->getUser();
     $commentFormView = null;
     if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
         // A user is fully authenticated : he can add comments
         $comment = new Comment();
         $comment->setArticle($article);
+        $user = $app['security']->getToken()->getUser();
         $comment->setAuthor($user);
         $commentForm = $app['form.factory']->create(new CommentType(), $comment);
         $commentForm->handleRequest($request);
@@ -33,7 +33,7 @@ $app->match('/article/{id}', function ($id, Request $request) use ($app) {
         'article' => $article, 
         'comments' => $comments,
         'commentForm' => $commentFormView));
-});
+})->bind('article');
 
 // Login form
 $app->get('/login', function(Request $request) use ($app) {
@@ -41,4 +41,4 @@ $app->get('/login', function(Request $request) use ($app) {
         'error'         => $app['security.last_error']($request),
         'last_username' => $app['session']->get('_security.last_username'),
     ));
-})->bind('login');  // named route so that path('login') works in Twig templates
+})->bind('login');
