@@ -45,6 +45,8 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
     'monolog.name' => 'MicroCMS',
     'monolog.level' => $app['monolog.level']
 ));
+// fix error on loading toolbar https://github.com/silexphp/Silex-WebProfiler/issues/67
+$app->register(new Silex\Provider\HttpFragmentServiceProvider());
 $app->register(new Silex\Provider\ServiceControllerServiceProvider());
 if (isset($app['debug']) && $app['debug']) {
     $app->register(new Silex\Provider\WebProfilerServiceProvider(), array(
@@ -80,4 +82,3 @@ $app->error(function (\Exception $e, $code) use ($app) {
     }
     return $app['twig']->render('error.html.twig', array('message' => $message));
 });
-
