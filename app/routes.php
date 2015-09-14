@@ -14,11 +14,11 @@ $app->get('/', function () use ($app) {
 $app->match('/article/{id}', function ($id, Request $request) use ($app) {
     $article = $app['dao.article']->find($id);
     $commentFormView = null;
-    if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
+    if ($app['security.authorization_checker']->isGranted('IS_AUTHENTICATED_FULLY')) {
         // A user is fully authenticated : he can add comments
         $comment = new Comment();
         $comment->setArticle($article);
-        $user = $app['security']->getToken()->getUser();
+        $user = $app['user'];
         $comment->setAuthor($user);
         $commentForm = $app['form.factory']->create(new CommentType(), $comment);
         $commentForm->handleRequest($request);
