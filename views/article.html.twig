@@ -15,7 +15,7 @@
     {% endfor %}
 
     <h3>Add a comment</h3>
-    {% if app.security.token and is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
         Soon!
     {% else %}
         <a href="{{ path('login') }} ">Log in</a> to add comments.
