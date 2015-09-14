@@ -93,7 +93,8 @@ $app->get('/admin/article/{id}/delete', function($id, Request $request) use ($ap
     // Delete the article
     $app['dao.article']->delete($id);
     $app['session']->getFlashBag()->add('success', 'The article was succesfully removed.');
-    return $app->redirect('/admin');
+    // Redirect to admin home page
+    return $app->redirect($app['url_generator']->generate('admin'));
 })->bind('admin_article_delete');
 
 // Edit an existing comment
@@ -114,7 +115,8 @@ $app->match('/admin/comment/{id}/edit', function($id, Request $request) use ($ap
 $app->get('/admin/comment/{id}/delete', function($id, Request $request) use ($app) {
     $app['dao.comment']->delete($id);
     $app['session']->getFlashBag()->add('success', 'The comment was succesfully removed.');
-    return $app->redirect('/admin');
+    // Redirect to admin home page
+    return $app->redirect($app['url_generator']->generate('admin'));
 })->bind('admin_comment_delete');
 
 // Add a user
@@ -167,5 +169,6 @@ $app->get('/admin/user/{id}/delete', function($id, Request $request) use ($app) 
     // Delete the user
     $app['dao.user']->delete($id);
     $app['session']->getFlashBag()->add('success', 'The user was succesfully removed.');
-    return $app->redirect('/admin');
+    // Redirect to admin home page
+    return $app->redirect($app['url_generator']->generate('admin'));
 })->bind('admin_user_delete');
