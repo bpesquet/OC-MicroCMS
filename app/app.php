@@ -16,9 +16,8 @@ $app['twig'] = $app->share($app->extend('twig', function(Twig_Environment $twig,
     $twig->addExtension(new Twig_Extensions_Extension_Text());
     return $twig;
 }));
-$app->register(new Silex\Provider\ValidatorServiceProvider());
-$app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+$app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     'security.firewalls' => array(
         'secured' => array(
@@ -40,6 +39,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
 ));
 $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\TranslationServiceProvider());
+$app->register(new Silex\Provider\ValidatorServiceProvider());
 
 // Register services
 $app['dao.article'] = $app->share(function ($app) {
