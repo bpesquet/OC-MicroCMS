@@ -12,17 +12,17 @@ use MicroCMS\Form\Type\UserType;
 $app->get('/', function () use ($app) {
     $articles = $app['dao.article']->findAll();
     return $app['twig']->render('index.html.twig', array('articles' => $articles));
-});
+})->bind('home');
 
 // Article details with comments
 $app->match('/article/{id}', function ($id, Request $request) use ($app) {
     $article = $app['dao.article']->find($id);
-    $user = $app['security']->getToken()->getUser();
     $commentFormView = null;
-    if ($app['security']->isGranted('IS_AUTHENTICATED_FULLY')) {
+    if ($app['security.authorization_checker']->isGranted('IS_AUTHENTICATED_FULLY')) {
         // A user is fully authenticated : he can add comments
         $comment = new Comment();
         $comment->setArticle($article);
+        $user = $app['user'];
         $comment->setAuthor($user);
         $commentForm = $app['form.factory']->create(new CommentType(), $comment);
         $commentForm->handleRequest($request);
@@ -37,7 +37,7 @@ $app->match('/article/{id}', function ($id, Request $request) use ($app) {
         'article' => $article, 
         'comments' => $comments,
         'commentForm' => $commentFormView));
-});
+})->bind('article');
 
 // Login form
 $app->get('/login', function(Request $request) use ($app) {
@@ -45,7 +45,7 @@ $app->get('/login', function(Request $request) use ($app) {
         'error'         => $app['security.last_error']($request),
         'last_username' => $app['session']->get('_security.last_username'),
     ));
-})->bind('login');  // named route so that path('login') works in Twig templates
+})->bind('login');
 
 // Admin home page
 $app->get('/admin', function() use ($app) {
@@ -56,7 +56,7 @@ $app->get('/admin', function() use ($app) {
         'articles' => $articles,
         'comments' => $comments,
         'users' => $users));
-});
+})->bind('admin');
 
 // Add a new article
 $app->match('/admin/article/add', function(Request $request) use ($app) {
@@ -70,7 +70,7 @@ $app->match('/admin/article/add', function(Request $request) use ($app) {
     return $app['twig']->render('article_form.html.twig', array(
         'title' => 'New article',
         'articleForm' => $articleForm->createView()));
-});
+})->bind('admin_article_add');
 
 // Edit an existing article
 $app->match('/admin/article/{id}/edit', function($id, Request $request) use ($app) {
@@ -84,7 +84,7 @@ $app->match('/admin/article/{id}/edit', function($id, Request $request) use ($ap
     return $app['twig']->render('article_form.html.twig', array(
         'title' => 'Edit article',
         'articleForm' => $articleForm->createView()));
-});
+})->bind('admin_article_edit');
 
 // Remove an article
 $app->get('/admin/article/{id}/delete', function($id, Request $request) use ($app) {
@@ -94,7 +94,7 @@ $app->get('/admin/article/{id}/delete', function($id, Request $request) use ($ap
     $app['dao.article']->delete($id);
     $app['session']->getFlashBag()->add('success', 'The article was succesfully removed.');
     return $app->redirect('/admin');
-});
+})->bind('admin_article_delete');
 
 // Edit an existing comment
 $app->match('/admin/comment/{id}/edit', function($id, Request $request) use ($app) {
@@ -108,14 +108,14 @@ $app->match('/admin/comment/{id}/edit', function($id, Request $request) use ($ap
     return $app['twig']->render('comment_form.html.twig', array(
         'title' => 'Edit comment',
         'commentForm' => $commentForm->createView()));
-});
+})->bind('admin_comment_edit');
 
 // Remove a comment
 $app->get('/admin/comment/{id}/delete', function($id, Request $request) use ($app) {
     $app['dao.comment']->delete($id);
     $app['session']->getFlashBag()->add('success', 'The comment was succesfully removed.');
     return $app->redirect('/admin');
-});
+})->bind('admin_comment_delete');
 
 // Add a user
 $app->match('/admin/user/add', function(Request $request) use ($app) {
@@ -138,7 +138,7 @@ $app->match('/admin/user/add', function(Request $request) use ($app) {
     return $app['twig']->render('user_form.html.twig', array(
         'title' => 'New user',
         'userForm' => $userForm->createView()));
-});
+})->bind('admin_user_add');
 
 // Edit an existing user
 $app->match('/admin/user/{id}/edit', function($id, Request $request) use ($app) {
@@ -158,7 +158,7 @@ $app->match('/admin/user/{id}/edit', function($id, Request $request) use ($app) 
     return $app['twig']->render('user_form.html.twig', array(
         'title' => 'Edit user',
         'userForm' => $userForm->createView()));
-});
+})->bind('admin_user_edit');
 
 // Remove a user
 $app->get('/admin/user/{id}/delete', function($id, Request $request) use ($app) {
@@ -168,4 +168,4 @@ $app->get('/admin/user/{id}/delete', function($id, Request $request) use ($app) 
     $app['dao.user']->delete($id);
     $app['session']->getFlashBag()->add('success', 'The user was succesfully removed.');
     return $app->redirect('/admin');
-});
+})->bind('admin_user_delete');

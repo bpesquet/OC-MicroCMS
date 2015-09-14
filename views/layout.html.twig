@@ -18,17 +18,17 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/">MicroCMS</a>
+                    <a class="navbar-brand" href="{{ path('home') }}">MicroCMS</a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse-target">
                     <ul class="nav navbar-nav navbar-right">
-                        {% if app.security.token and is_granted('ROLE_ADMIN') %}
-                            <li class="{% if adminMenu is defined %}active{% endif %}"><a href="/admin"><span class="glyphicon glyphicon-cog"></span> Administration</a></li>
+                        {% if app.user and is_granted('ROLE_ADMIN') %}
+                            <li class="{% if adminMenu is defined %}active{% endif %}"><a href="{{ path('admin') }}"><span class="glyphicon glyphicon-cog"></span> Administration</a></li>
                         {% endif %}
-                        {% if app.security.token and is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
                             <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <span class="glyphicon glyphicon-user"></span> Welcome, {{ app.security.token.user.username }} <b class="caret"></b></a>
+                                <span class="glyphicon glyphicon-user"></span> Welcome, {{ app.user.username }} <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="{{ path('logout') }}">Log out</a></li>
                                 </ul>
@@ -53,7 +53,7 @@
     </div>
     
     <!-- jQuery -->
-    <script src="{{ app.request.basepath }}/lib/jquery/jquery-1.11.1.min.js"></script>
+    <script src="{{ app.request.basepath }}/lib/jquery/jquery.min.js"></script>
     <!-- JavaScript Boostrap plugin -->
     <script src="{{ app.request.basepath }}/lib/bootstrap/js/bootstrap.min.js"></script>
 </body>
