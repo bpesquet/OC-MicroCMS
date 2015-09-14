@@ -78,7 +78,8 @@ class AdminController {
         // Delete the article
         $app['dao.article']->delete($id);
         $app['session']->getFlashBag()->add('success', 'The article was succesfully removed.');
-        return $app->redirect('/admin');
+        // Redirect to admin home page
+        return $app->redirect($app['url_generator']->generate('admin'));
     }
 
     /**
@@ -110,7 +111,8 @@ class AdminController {
     public function deleteCommentAction($id, Application $app) {
         $app['dao.comment']->delete($id);
         $app['session']->getFlashBag()->add('success', 'The comment was succesfully removed.');
-        return $app->redirect('/admin');
+        // Redirect to admin home page
+        return $app->redirect($app['url_generator']->generate('admin'));
     }
 
     /**
@@ -179,6 +181,7 @@ class AdminController {
         // Delete the user
         $app['dao.user']->delete($id);
         $app['session']->getFlashBag()->add('success', 'The user was succesfully removed.');
-        return $app->redirect('/admin');
+        // Redirect to admin home page
+        return $app->redirect($app['url_generator']->generate('admin'));
     }
 }
