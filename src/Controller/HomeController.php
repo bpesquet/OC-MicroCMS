@@ -30,7 +30,7 @@ class HomeController {
         $article = $app['dao.article']->find($id);
         $commentFormView = null;
         if ($app['security.authorization_checker']->isGranted('IS_AUTHENTICATED_FULLY')) {
-        // A user is fully authenticated : he can add comments
+            // A user is fully authenticated : he can add comments
             $comment = new Comment();
             $comment->setArticle($article);
             $user = $app['user'];
