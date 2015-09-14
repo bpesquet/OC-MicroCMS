@@ -16,9 +16,8 @@ $app['twig'] = $app->share($app->extend('twig', function(Twig_Environment $twig,
     $twig->addExtension(new Twig_Extensions_Extension_Text());
     return $twig;
 }));
-$app->register(new Silex\Provider\ValidatorServiceProvider());
-$app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+$app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     'security.firewalls' => array(
         'secured' => array(
@@ -40,6 +39,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
 ));
 $app->register(new Silex\Provider\FormServiceProvider());
 $app->register(new Silex\Provider\TranslationServiceProvider());
+$app->register(new Silex\Provider\ValidatorServiceProvider());
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
     'monolog.logfile' => __DIR__.'/../var/logs/microcms.log',
     'monolog.name' => 'MicroCMS',
@@ -47,6 +47,7 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 ));
 $app->register(new Silex\Provider\ServiceControllerServiceProvider());
 if (isset($app['debug']) && $app['debug']) {
+    $app->register(new Silex\Provider\HttpFragmentServiceProvider());
     $app->register(new Silex\Provider\WebProfilerServiceProvider(), array(
         'profiler.cache_dir' => __DIR__.'/../var/cache/profiler'
     ));
