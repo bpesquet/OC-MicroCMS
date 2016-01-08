@@ -11,6 +11,7 @@
         "symfony/validator": "2.7.*",
         "symfony/config": "2.7.*",
         "symfony/monolog-bridge": "2.7.*",
+        "symfony/http-kernel": "2.8.*",
         "silex/web-profiler": "1.0.*"
     },
     "require-dev": {
