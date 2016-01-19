@@ -48,6 +48,7 @@ class User implements UserInterface
 
     public function setId($id) {
         $this->id = $id;
+        return $this;
     }
 
     /**
@@ -59,6 +60,7 @@ class User implements UserInterface
 
     public function setUsername($username) {
         $this->username = $username;
+        return $this;
     }
 
     /**
@@ -70,35 +72,34 @@ class User implements UserInterface
 
     public function setPassword($password) {
         $this->password = $password;
+        return $this;
     }
 
     /**
      * @inheritDoc
      */
-    public function getSalt()
-    {
+    public function getSalt() {
         return $this->salt;
     }
 
-    public function setSalt($salt)
-    {
+    public function setSalt($salt) {
         $this->salt = $salt;
+        return $this;
     }
 
-    public function getRole()
-    {
+    public function getRole() {
         return $this->role;
     }
 
     public function setRole($role) {
         $this->role = $role;
+        return $this;
     }
 
     /**
      * @inheritDoc
      */
-    public function getRoles()
-    {
+    public function getRoles() {
         return array($this->getRole());
     }
 
