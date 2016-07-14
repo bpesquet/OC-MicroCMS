@@ -53,6 +53,12 @@ if (isset($app['debug']) && $app['debug']) {
         'profiler.cache_dir' => __DIR__.'/../var/cache/profiler'
     ));
 }
+$app->register(new Silex\Provider\AssetServiceProvider(), array(
+    'assets.version' => 'v1',
+    'assets.version_format' => '%s?version=%s',
+    'assets.named_packages' => array()
+    )
+);
 
 // Register services
 $app['dao.article'] = $app->share(function ($app) {
