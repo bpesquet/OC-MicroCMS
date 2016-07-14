@@ -35,7 +35,7 @@ class AdminController {
      */
     public function addArticleAction(Request $request, Application $app) {
         $article = new Article();
-        $articleForm = $app['form.factory']->create(new ArticleType(), $article);
+        $articleForm = $app['form.factory']->create(ArticleType::class, $article);
         $articleForm->handleRequest($request);
         if ($articleForm->isSubmitted() && $articleForm->isValid()) {
             $app['dao.article']->save($article);
@@ -55,7 +55,7 @@ class AdminController {
      */
     public function editArticleAction($id, Request $request, Application $app) {
         $article = $app['dao.article']->find($id);
-        $articleForm = $app['form.factory']->create(new ArticleType(), $article);
+        $articleForm = $app['form.factory']->create(ArticleType::class, $article);
         $articleForm->handleRequest($request);
         if ($articleForm->isSubmitted() && $articleForm->isValid()) {
             $app['dao.article']->save($article);
@@ -91,7 +91,7 @@ class AdminController {
      */
     public function editCommentAction($id, Request $request, Application $app) {
         $comment = $app['dao.comment']->find($id);
-        $commentForm = $app['form.factory']->create(new CommentType(), $comment);
+        $commentForm = $app['form.factory']->create(CommentType::class, $comment);
         $commentForm->handleRequest($request);
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $app['dao.comment']->save($comment);
@@ -123,7 +123,7 @@ class AdminController {
      */
     public function addUserAction(Request $request, Application $app) {
         $user = new User();
-        $userForm = $app['form.factory']->create(new UserType(), $user);
+        $userForm = $app['form.factory']->create(UserType::class, $user);
         $userForm->handleRequest($request);
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             // generate a random salt value
@@ -152,7 +152,7 @@ class AdminController {
      */
     public function editUserAction($id, Request $request, Application $app) {
         $user = $app['dao.user']->find($id);
-        $userForm = $app['form.factory']->create(new UserType(), $user);
+        $userForm = $app['form.factory']->create(UserType::class, $user);
         $userForm->handleRequest($request);
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             $plainPassword = $user->getPassword();
