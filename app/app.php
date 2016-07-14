@@ -3,6 +3,7 @@
 use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\Debug\ExceptionHandler;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 // Register global error and exception handlers
 ErrorHandler::register();
@@ -38,6 +39,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), array(
     ),
 ));
 $app->register(new Silex\Provider\FormServiceProvider());
+$app->register(new Silex\Provider\LocaleServiceProvider());
 $app->register(new Silex\Provider\TranslationServiceProvider());
 $app->register(new Silex\Provider\ValidatorServiceProvider());
 $app->register(new Silex\Provider\MonologServiceProvider(), array(
@@ -74,7 +76,7 @@ $app['dao.comment'] = function ($app) {
 };
 
 // Register error handler
-$app->error(function (\Exception $e, $code) use ($app) {
+$app->error(function (\Exception $e, Request $request, $code) use ($app) {
     switch ($code) {
         case 403:
             $message = 'Access denied.';
