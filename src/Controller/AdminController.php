@@ -131,7 +131,7 @@ class AdminController {
             $user->setSalt($salt);
             $plainPassword = $user->getPassword();
             // find the default encoder
-            $encoder = $app['security.encoder.digest'];
+            $encoder = $app['security.encoder.bcrypt'];
             // compute the encoded password
             $password = $encoder->encodePassword($plainPassword, $user->getSalt());
             $user->setPassword($password); 
