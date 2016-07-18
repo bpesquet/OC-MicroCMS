@@ -1,3 +1,5 @@
+*Note sur ce fork : Il s'agit d'une mise à jour pour Silex 2.0.2.*
+
 # OC-MicroCMS
 
 Support du cours OpenClassrooms [Evoluez vers une architecture PHP professionnelle](http://openclassrooms.com/courses/evoluez-vers-une-architecture-php-professionnelle).
