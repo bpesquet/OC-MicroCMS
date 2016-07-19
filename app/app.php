@@ -12,5 +12,5 @@ $app->register(new Silex\Provider\DoctrineServiceProvider());
 
 // Register services.
 $app['dao.article'] = function($app){
-    return new activite\DAO\ArticleDAO($app['db']);
+    return new MicroCMS\DAO\ArticleDAO($app['db']);
 });
