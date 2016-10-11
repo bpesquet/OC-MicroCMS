@@ -40,6 +40,7 @@ class AdminController {
         if ($articleForm->isSubmitted() && $articleForm->isValid()) {
             $app['dao.article']->save($article);
             $app['session']->getFlashBag()->add('success', 'The article was successfully created.');
+            return $app->redirect('/admin/article/' . $article->getId() . '/edit');
         }
         return $app['twig']->render('article_form.html.twig', array(
             'title' => 'New article',
