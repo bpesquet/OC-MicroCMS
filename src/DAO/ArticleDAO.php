@@ -47,7 +47,7 @@ class ArticleDAO
      * @param array $row The DB row containing Article data.
      * @return \MicroCMS\Domain\Article
      */
-    private function buildArticle($row) {
+    private function buildArticle(array $row) {
         $article = new Article();
         $article->setId($row['art_id']);
         $article->setTitle($row['art_title']);
