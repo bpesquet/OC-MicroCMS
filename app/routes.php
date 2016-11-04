@@ -24,11 +24,12 @@ $app->match('/article/{id}', function ($id, Request $request) use ($app) {
         $commentForm->handleRequest($request);
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $app['dao.comment']->save($comment);
-            $app['session']->getFlashBag()->add('success', 'Your comment was succesfully added.');
+            $app['session']->getFlashBag()->add('success', 'Your comment was successfully added.');
         }
         $commentFormView = $commentForm->createView();
     }
     $comments = $app['dao.comment']->findAllByArticle($id);
+
     return $app['twig']->render('article.html.twig', array(
         'article' => $article, 
         'comments' => $comments,
