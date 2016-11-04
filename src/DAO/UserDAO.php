@@ -67,7 +67,7 @@ class UserDAO extends DAO implements UserProviderInterface
      * @param array $row The DB row containing User data.
      * @return \MicroCMS\Domain\User
      */
-    protected function buildDomainObject($row) {
+    protected function buildDomainObject(array $row) {
         $user = new User();
         $user->setId($row['usr_id']);
         $user->setUsername($row['usr_name']);
