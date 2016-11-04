@@ -38,6 +38,7 @@ class Comment
 
     public function setId($id) {
         $this->id = $id;
+        return $this;
     }
 
     public function getAuthor() {
@@ -46,6 +47,7 @@ class Comment
 
     public function setAuthor(User $author) {
         $this->author = $author;
+        return $this;
     }
 
     public function getContent() {
@@ -54,6 +56,7 @@ class Comment
 
     public function setContent($content) {
         $this->content = $content;
+        return $this;
     }
 
     public function getArticle() {
@@ -62,5 +65,6 @@ class Comment
 
     public function setArticle(Article $article) {
         $this->article = $article;
+        return $this;
     }
 }
