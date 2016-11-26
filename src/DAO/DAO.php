@@ -35,5 +35,5 @@ abstract class DAO
      * Builds a domain object from a DB row.
      * Must be overridden by child classes.
      */
-    protected abstract function buildDomainObject($row);
+    protected abstract function buildDomainObject(array $row);
 }
