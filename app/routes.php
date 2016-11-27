@@ -20,7 +20,7 @@ $app->match('/article/{id}', function ($id, Request $request) use ($app) {
         $comment->setArticle($article);
         $user = $app['user'];
         $comment->setAuthor($user);
-        $commentForm = $app['form.factory']->create(new CommentType(), $comment);
+        $commentForm = $app['form.factory']->create(CommentType::class, $comment);
         $commentForm->handleRequest($request);
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $app['dao.comment']->save($comment);
