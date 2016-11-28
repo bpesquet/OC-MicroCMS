@@ -18,7 +18,7 @@ class HomeController {
         $articles = $app['dao.article']->findAll();
         return $app['twig']->render('index.html.twig', array('articles' => $articles));
     }
-
+    
     /**
      * Article details controller.
      *
@@ -35,21 +35,22 @@ class HomeController {
             $comment->setArticle($article);
             $user = $app['user'];
             $comment->setAuthor($user);
-            $commentForm = $app['form.factory']->create(new CommentType(), $comment);
+            $commentForm = $app['form.factory']->create(CommentType::class, $comment);
             $commentForm->handleRequest($request);
             if ($commentForm->isSubmitted() && $commentForm->isValid()) {
                 $app['dao.comment']->save($comment);
-                $app['session']->getFlashBag()->add('success', 'Your comment was succesfully added.');
+                $app['session']->getFlashBag()->add('success', 'Your comment was successfully added.');
             }
             $commentFormView = $commentForm->createView();
         }
         $comments = $app['dao.comment']->findAllByArticle($id);
+        
         return $app['twig']->render('article.html.twig', array(
-            'article' => $article, 
+            'article' => $article,
             'comments' => $comments,
             'commentForm' => $commentFormView));
     }
-
+    
     /**
      * User login controller.
      *
@@ -60,6 +61,6 @@ class HomeController {
         return $app['twig']->render('login.html.twig', array(
             'error'         => $app['security.last_error']($request),
             'last_username' => $app['session']->get('_security.last_username'),
-            ));
+        ));
     }
 }
