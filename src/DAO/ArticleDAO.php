@@ -80,7 +80,8 @@ class ArticleDAO extends DAO
      * @param array $row The DB row containing Article data.
      * @return \MicroCMS\Domain\Article
      */
-    protected function buildDomainObject($row) {
+
+    protected function buildDomainObject(array $row) {
         $article = new Article();
         $article->setId($row['art_id']);
         $article->setTitle($row['art_title']);

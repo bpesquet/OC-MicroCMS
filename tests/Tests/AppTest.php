@@ -35,7 +35,7 @@ class AppTest extends WebTestCase
         require __DIR__.'/../../app/routes.php';
         
         // Generate raw exceptions instead of HTML pages if errors occur
-        $app['exception_handler']->disable();
+        unset($app['exception_handler']);
         // Simulate sessions for testing
         $app['session.test'] = true;
         // Enable anonymous access to admin zone
