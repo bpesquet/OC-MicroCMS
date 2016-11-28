@@ -2,6 +2,7 @@
 
 use Symfony\Component\Debug\ErrorHandler;
 use Symfony\Component\Debug\ExceptionHandler;
+use Symfony\Component\HttpFoundation\Request;
 
 // Register global error and exception handlers
 ErrorHandler::register();
@@ -71,7 +72,7 @@ $app['dao.comment'] = function ($app) {
 };
 
 // Register error handler
-$app->error(function (\Exception $e, $code) use ($app) {
+$app->error(function (\Exception $e, Request $request, $code) use ($app) {
     switch ($code) {
         case 403:
             $message = 'Access denied.';
