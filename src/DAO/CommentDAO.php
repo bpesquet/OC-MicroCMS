@@ -20,7 +20,7 @@ class CommentDAO extends DAO
         $this->articleDAO = $articleDAO;
     }
 
-    public function setUserDAO($userDAO) {
+    public function setUserDAO(UserDAO $userDAO) {
         $this->userDAO = $userDAO;
     }
 
@@ -145,7 +145,7 @@ class CommentDAO extends DAO
      * @param array $row The DB row containing Comment data.
      * @return \MicroCMS\Domain\Comment
      */
-    protected function buildDomainObject($row) {
+    protected function buildDomainObject(array $row) {
         $comment = new Comment();
         $comment->setId($row['com_id']);
         $comment->setContent($row['com_content']);
