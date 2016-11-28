@@ -24,7 +24,7 @@ $app->match('/article/{id}', function ($id, Request $request) use ($app) {
         $comment->setArticle($article);
         $user = $app['user'];
         $comment->setAuthor($user);
-        $commentForm = $app['form.factory']->create(new CommentType(), $comment);
+        $commentForm = $app['form.factory']->create(CommentType::class, $comment);
         $commentForm->handleRequest($request);
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $app['dao.comment']->save($comment);
@@ -62,7 +62,7 @@ $app->get('/admin', function() use ($app) {
 // Add a new article
 $app->match('/admin/article/add', function(Request $request) use ($app) {
     $article = new Article();
-    $articleForm = $app['form.factory']->create(new ArticleType(), $article);
+    $articleForm = $app['form.factory']->create(ArticleType::class, $article);
     $articleForm->handleRequest($request);
     if ($articleForm->isSubmitted() && $articleForm->isValid()) {
         $app['dao.article']->save($article);
@@ -76,7 +76,7 @@ $app->match('/admin/article/add', function(Request $request) use ($app) {
 // Edit an existing article
 $app->match('/admin/article/{id}/edit', function($id, Request $request) use ($app) {
     $article = $app['dao.article']->find($id);
-    $articleForm = $app['form.factory']->create(new ArticleType(), $article);
+    $articleForm = $app['form.factory']->create(ArticleType::class, $article);
     $articleForm->handleRequest($request);
     if ($articleForm->isSubmitted() && $articleForm->isValid()) {
         $app['dao.article']->save($article);
@@ -101,7 +101,7 @@ $app->get('/admin/article/{id}/delete', function($id, Request $request) use ($ap
 // Edit an existing comment
 $app->match('/admin/comment/{id}/edit', function($id, Request $request) use ($app) {
     $comment = $app['dao.comment']->find($id);
-    $commentForm = $app['form.factory']->create(new CommentType(), $comment);
+    $commentForm = $app['form.factory']->create(CommentType::class, $comment);
     $commentForm->handleRequest($request);
     if ($commentForm->isSubmitted() && $commentForm->isValid()) {
         $app['dao.comment']->save($comment);
@@ -123,7 +123,7 @@ $app->get('/admin/comment/{id}/delete', function($id, Request $request) use ($ap
 // Add a user
 $app->match('/admin/user/add', function(Request $request) use ($app) {
     $user = new User();
-    $userForm = $app['form.factory']->create(new UserType(), $user);
+    $userForm = $app['form.factory']->create(UserType::class, $user);
     $userForm->handleRequest($request);
     if ($userForm->isSubmitted() && $userForm->isValid()) {
         // generate a random salt value
@@ -131,7 +131,7 @@ $app->match('/admin/user/add', function(Request $request) use ($app) {
         $user->setSalt($salt);
         $plainPassword = $user->getPassword();
         // find the default encoder
-        $encoder = $app['security.encoder.digest'];
+        $encoder = $app['security.encoder.bcrypt'];
         // compute the encoded password
         $password = $encoder->encodePassword($plainPassword, $user->getSalt());
         $user->setPassword($password); 
@@ -146,7 +146,7 @@ $app->match('/admin/user/add', function(Request $request) use ($app) {
 // Edit an existing user
 $app->match('/admin/user/{id}/edit', function($id, Request $request) use ($app) {
     $user = $app['dao.user']->find($id);
-    $userForm = $app['form.factory']->create(new UserType(), $user);
+    $userForm = $app['form.factory']->create(UserType::class, $user);
     $userForm->handleRequest($request);
     if ($userForm->isSubmitted() && $userForm->isValid()) {
         $plainPassword = $user->getPassword();
