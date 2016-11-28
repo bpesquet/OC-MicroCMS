@@ -5,7 +5,7 @@
 {% block content %}
 <div class="row" id="errorPanel">
     <div class="col-xs-5">
-        <img class="img-responsive pull-right" src="{{ app.request.basepath }}/images/404-ghost.png" alt="Error ghost"/>
+        <img class="img-responsive pull-right" src="{{ asset('/images/404-ghost.png') }}" alt="Error ghost"/>
     </div>
     <div class="col-xs-6">
         <h1>Whoops...<br><small>{{ message }}</small></h1>
