@@ -96,7 +96,9 @@ class CommentDAO extends DAO
         $commentData = array(
             'art_id' => $comment->getArticle()->getId(),
             'usr_id' => $comment->getAuthor()->getId(),
-            'com_content' => $comment->getContent()
+            'com_content' => $comment->getContent(),
+            'com_url'     => $comment->getWebsite(),
+            'com_email'   => $comment->getEmail(),
             );
 
         if ($comment->getId()) {
@@ -149,6 +151,8 @@ class CommentDAO extends DAO
         $comment = new Comment();
         $comment->setId($row['com_id']);
         $comment->setContent($row['com_content']);
+        $comment->setWebsite($row['com_url']);
+        $comment->setEmail($row['com_email']);
 
         if (array_key_exists('art_id', $row)) {
             // Find and set the associated article
