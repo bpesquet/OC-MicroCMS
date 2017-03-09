@@ -55,7 +55,7 @@ class CommentDAO extends DAO
 
         // art_id is not selected by the SQL query
         // The article won't be retrieved during domain objet construction
-        $sql = "select com_id, com_content, usr_id from t_comment where art_id=? order by com_id";
+        $sql = "select com_id, com_content, com_url, com_email, usr_id from t_comment where art_id=? order by com_id";
         $result = $this->getDb()->fetchAll($sql, array($articleId));
 
         // Convert query result to an array of domain objects
@@ -81,10 +81,11 @@ class CommentDAO extends DAO
         $sql = "select * from t_comment where com_id=?";
         $row = $this->getDb()->fetchAssoc($sql, array($id));
 
-        if ($row)
+        if ($row) {
             return $this->buildDomainObject($row);
-        else
+        } else {
             throw new \Exception("No comment matching id " . $id);
+        }
     }
 
     /**
