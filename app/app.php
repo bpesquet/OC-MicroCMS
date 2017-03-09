@@ -12,6 +12,9 @@ ExceptionHandler::register();
 $app->register(new Silex\Provider\DoctrineServiceProvider());
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
+    'twig.options'    => array(
+        'cache' => __DIR__ . '/../var/cache/twig',
+        )
 ));
 $app['twig'] = $app->extend('twig', function(Twig_Environment $twig, $app) {
     $twig->addExtension(new Twig_Extensions_Extension_Text());
