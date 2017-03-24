@@ -1,5 +1,5 @@
 {% extends "layout.html.twig" %}
-
+{% form_theme commentForm 'bootstrap_3_horizontal_layout.html.twig' %}
 {% block title %}{{ article.title }}{% endblock %}
 
 {% block content %}
@@ -16,39 +16,23 @@
     <h3>Add a comment</h3>
     {% if commentForm %}
         {{ form_start(commentForm) }}
-            <div class="form-group">
-                {{ form_label(commentForm.email, null, { 'label_attr':  {
-                'class': 'col-sm-2 control-label'
-                }}) }}
-                <div class="col-sm-10">
-                    {{ form_errors(commentForm.email) }}
-                    {{ form_widget(commentForm.email, { 'attr':  {
-                        'class': 'form-control',
-                    }}) }}
-                </div> 
+        {{ form_start(commentForm) }}
+
+        {{ form_row(commentForm.email) }}
+        {{ form_widget(commentForm.email) }}
+
+        {{ form_row(commentForm.website) }}
+        {{ form_widget(commentForm.website) }}
+
+        {{ form_row(commentForm.content) }}
+        {{ form_widget(commentForm.content) }}
+
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-3">
+                <input type="submit" class="btn btn-primary" value="Save" />
             </div>
-            <div class="form-group">
-                {{ form_label(commentForm.website, null, { 'label_attr':  {
-                'class': 'col-sm-2 control-label'
-                }}) }}
-                <div class="col-sm-10">
-                    {{ form_errors(commentForm.website) }}
-                    {{ form_widget(commentForm.website, { 'attr':  {
-                        'class': 'form-control',
-                    }}) }}
-                </div> 
-            </div>
-            <div class="form-group">
-                {{ form_errors(commentForm.content) }}
-                {{ form_widget(commentForm.content, { 'attr':  {
-                    'rows': '4',
-                    'class': 'form-control',
-                    'placeholder': 'Enter your comment'
-                }}) }}
-            </div>
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary" value="Publish comment" />
-            </div>
+        </div>
+        {{ form_end(commentForm) }}
         {{ form_end(commentForm) }}
         {% for flashMessage in app.session.flashbag.get('success') %}
             <div class="alert alert-success">
@@ -58,5 +42,4 @@
     {% else %}
         <a href="{{ path('login') }} ">Log in</a> to add comments.
     {% endif %}
-</p>
 {% endblock %}

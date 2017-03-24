@@ -14,22 +14,23 @@ class CommentType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder->add('email', EmailType::class, [
-                    'label'           => 'Votre eMail :',
+                    'label'           => 'Votre eMail ',
                     'attr'            => ['placeholder' => '(ne sera pas publié)'],
                     'required'        => true,
                     'invalid_message' => 'Cette eMail n\'est pas valide.',
                     'constraints'     => new Assert\Email(['checkMX' => true]),
                 ])
                 ->add('website', UrlType::class, [
-                    'label'           => 'Site web',
+                    'label'           => 'Your webSite',
                     'required'        => false,
                     'constraints'     => new Assert\Url(),
                     'invalid_message' => 'Cette URL n\'est pas valide.',
                 ])
-                ->add('content', TextareaType::class, array(
+                ->add('content', TextareaType::class,[
+                    'label'       => 'Your comment',
                     'required'    => true,
                     'constraints' => new Assert\NotBlank(),
-        ));
+        ]);
     }
 
     public function getName() {

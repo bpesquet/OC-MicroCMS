@@ -34,7 +34,7 @@ class UserType extends AbstractType
                     ),
                     'second_options'  => array(
                         'label'       => 'Repeat password',
-                        'attr'        => ['placeholder' => 'Always 6 characters'],
+                        'attr'        => ['placeholder' => 'The same password'],
                         'required'    => true,
                     ),
                 ))

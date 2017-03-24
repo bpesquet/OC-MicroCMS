@@ -1,4 +1,5 @@
 {% extends 'layout.html.twig' %}
+{% form_theme commentForm 'bootstrap_3_horizontal_layout.html.twig' %}
 {% set adminMenu = true %}
 
 {% block title %}{{ title }}{% endblock %}
@@ -12,43 +13,17 @@
 {% endfor %}
 
 <div class="well">
-{{ form_start(commentForm, { 'attr': {'class': 'form-horizontal'} }) }}
-    <div class="form-group">
-        {{ form_label(commentForm.email, null, { 'label_attr':  {
-            'class': 'col-sm-4 control-label'
-        }}) }}
-        <div class="col-sm-6">
-            {{ form_errors(commentForm.email) }}
-            {{ form_widget(commentForm.email, { 'attr':  {
-                'class': 'form-control',
-                'rows': '4'                
-            }}) }}
-        </div>
-    </div>
-    <div class="form-group">
-        {{ form_label(commentForm.email, null, { 'label_attr':  {
-            'class': 'col-sm-4 control-label'
-        }}) }}
-        <div class="col-sm-6">
-            {{ form_errors(commentForm.website) }}
-            {{ form_widget(commentForm.website, { 'attr':  {
-                'class': 'form-control',
-                'rows': '4'                
-            }}) }}
-        </div>
-    </div>
-    <div class="form-group">
-        {{ form_label(commentForm.content, null, { 'label_attr':  {
-            'class': 'col-sm-4 control-label'
-        }}) }}
-        <div class="col-sm-6">
-            {{ form_errors(commentForm.content) }}
-            {{ form_widget(commentForm.content, { 'attr':  {
-                'class': 'form-control',
-                'rows': '4'                
-            }}) }}
-        </div>
-    </div>
+{{ form_start(commentForm) }}
+ 
+        {{ form_row(commentForm.email) }}
+        {{ form_widget(commentForm.email) }}
+ 
+        {{ form_row(commentForm.website) }}
+        {{ form_widget(commentForm.website) }}
+            
+        {{ form_row(commentForm.content) }}
+        {{ form_widget(commentForm.content) }}
+         
     <div class="form-group">
         <div class="col-sm-offset-4 col-sm-3">
             <input type="submit" class="btn btn-primary" value="Save" />

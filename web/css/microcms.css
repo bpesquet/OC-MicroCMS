@@ -21,3 +21,8 @@ body {
     padding-top: 30px;
     padding-bottom: 10px;
 }
+
+label.required:after {
+    content: " *";
+    color: #c12e2a;
+}
