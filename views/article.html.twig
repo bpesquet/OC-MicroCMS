@@ -16,7 +16,6 @@
     <h3>Add a comment</h3>
     {% if commentForm %}
         {{ form_start(commentForm) }}
-        {{ form_start(commentForm) }}
 
         {{ form_row(commentForm.email) }}
         {{ form_widget(commentForm.email) }}
@@ -32,7 +31,6 @@
                 <input type="submit" class="btn btn-primary" value="Save" />
             </div>
         </div>
-        {{ form_end(commentForm) }}
         {{ form_end(commentForm) }}
         {% for flashMessage in app.session.flashbag.get('success') %}
             <div class="alert alert-success">
