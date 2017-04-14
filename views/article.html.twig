@@ -1,5 +1,7 @@
 {% extends "layout.html.twig" %}
-{% form_theme commentForm 'bootstrap_3_horizontal_layout.html.twig' %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% form_theme commentForm 'bootstrap_3_horizontal_layout.html.twig' %}
+{% endif %}
 {% block title %}{{ article.title }}{% endblock %}
 
 {% block content %}
@@ -14,7 +16,8 @@
     {% endfor %}
 
     <h3>Add a comment</h3>
-    {% if commentForm %}
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+   
         {{ form_start(commentForm) }}
 
         {{ form_row(commentForm.email) }}
