@@ -15,10 +15,11 @@ class ArticleType extends AbstractType
         $builder
                 ->add('title', TextType::class, array(
                     'required'    => true,
-                    'constraints' => [new Assert\NotBlank(), 
-                        new Assert\Length([
-                        'min' => 5,'max' => 110,
-                        ])],
+                    'constraints' => array(
+                        new Assert\NotBlank(), 
+                        new Assert\Length(array(
+                        'min' => 5,'max' => 100,
+                        ))),
                 ))
                 ->add('content', TextareaType::class, array(
                     'required'    => true,
