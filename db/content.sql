@@ -16,6 +16,7 @@ insert into t_user values
 (3, 'admin', '$2y$13$A8MQM2ZNOi99EW.ML7srhOJsCaybSbexAj/0yXrJs4gQ/2BqMMW2K', 'EDDsl&fBCJB|a5XUtAlnQN8', 'ROLE_ADMIN');
 
 insert into t_comment values
-(1, 'Great! Keep up the good work.', 1, 1);
+(1, 'Great! Keep up the good work','https://openclassrooms.com','test@test.fr', 1, 1);
 insert into t_comment values
-(2, "Thank you, I'll try my best.", 1, 2);
+(2, "Thank you, I'll try my best.",'https://openclassrooms.com','toto@test.fr', 1, 2);
+
