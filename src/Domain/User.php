@@ -99,8 +99,7 @@ class User implements UserInterface
     /**
      * @inheritDoc
      */
-    public function getRoles()
-    {
+    public function getRoles() {
         return array($this->getRole());
     }
 
